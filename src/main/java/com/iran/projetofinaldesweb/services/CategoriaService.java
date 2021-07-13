@@ -7,19 +7,23 @@ import org.springframework.stereotype.Service;
 
 import com.iran.projetofinaldesweb.domain.Categoria;
 import com.iran.projetofinaldesweb.repositories.CategoriaRepository;
+import com.iran.projetofinaldesweb.services.exceptions.ObjectNotFoundException;
 
 @Service
-public class CategoriaService {
+public class CategoriaService { //Classe responsável pela consulta no repository
 	
 	@Autowired
 	private CategoriaRepository repo;
 	
 	public Categoria find(Integer id) {
 		Optional<Categoria> obj = repo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+		"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
 		}
 
 
 	}
+
+
 
 
