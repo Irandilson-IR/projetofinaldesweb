@@ -3,8 +3,6 @@ package com.iran.projetofinaldesweb.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +20,7 @@ public class Estado implements Serializable {
 	private String nome;
 	
 	@OneToMany(mappedBy="estado")
-	private List<Cidade> Cidades = new ArrayList();
+	private List<Cidade> Cidades = new ArrayList<Cidade>();
 	
 	public Estado() {
 		
