@@ -3,10 +3,12 @@ package com.iran.projetofinaldesweb.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.iran.projetofinaldesweb.domain.Categoria;
 import com.iran.projetofinaldesweb.repositories.CategoriaRepository;
+import com.iran.projetofinaldesweb.services.exceptions.DataIntegrityException;
 import com.iran.projetofinaldesweb.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -31,7 +33,20 @@ public class CategoriaService { //Classe responsável pela consulta no repositor
 			
 			return repo.save(obj);
 		}
-	}
+		
+		public void delete(Integer id) {
+			find(id);
+			try {
+				repo.deleteById(id);
+			}
+			catch (DataIntegrityViolationException e) {
+				throw new DataIntegrityException("Não é possível excluir uma categoria que possui produtos");
+			}
+		}
+			
+		}
+		
+	
 
 
 
