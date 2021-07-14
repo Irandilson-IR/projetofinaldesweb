@@ -13,6 +13,7 @@ import com.iran.projetofinaldesweb.domain.Cidade;
 import com.iran.projetofinaldesweb.domain.Cliente;
 import com.iran.projetofinaldesweb.domain.Endereco;
 import com.iran.projetofinaldesweb.domain.Estado;
+import com.iran.projetofinaldesweb.domain.ItemPedido;
 import com.iran.projetofinaldesweb.domain.Pagamento;
 import com.iran.projetofinaldesweb.domain.PagamentoComBoleto;
 import com.iran.projetofinaldesweb.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.iran.projetofinaldesweb.repositories.CidadeRepository;
 import com.iran.projetofinaldesweb.repositories.ClienteRepository;
 import com.iran.projetofinaldesweb.repositories.EnderecoRepository;
 import com.iran.projetofinaldesweb.repositories.EstadoRepository;
+import com.iran.projetofinaldesweb.repositories.ItemPedidoRepository;
 import com.iran.projetofinaldesweb.repositories.PagamentoRepository;
 import com.iran.projetofinaldesweb.repositories.PedidoRepository;
 import com.iran.projetofinaldesweb.repositories.ProdutoRepository;
@@ -48,7 +50,8 @@ public class ProjetofinaldeswebApplication implements CommandLineRunner{
 	private PedidoRepository pedidoRepository;
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
-	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 	
 	
 	public static void main(String[] args) {
@@ -146,5 +149,20 @@ public class ProjetofinaldeswebApplication implements CommandLineRunner{
 				
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
+	
+		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
+	
 	}
 }
