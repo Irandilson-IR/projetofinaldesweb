@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.iran.projetofinaldesweb.domain.Categoria;
+import com.iran.projetofinaldesweb.dto.CategoriaDTO;
 import com.iran.projetofinaldesweb.repositories.CategoriaRepository;
 import com.iran.projetofinaldesweb.services.exceptions.DataIntegrityException;
 import com.iran.projetofinaldesweb.services.exceptions.ObjectNotFoundException;
@@ -57,6 +58,9 @@ public class CategoriaService { //Classe responsável pela consulta no repositor
 			return repo.findAll(pageRequest);
 		}
 		
+		public Categoria fromDTO(CategoriaDTO objDto) {
+			return new Categoria(objDto.getId(), objDto.getNome());
+		}
 		}
 		
 		
