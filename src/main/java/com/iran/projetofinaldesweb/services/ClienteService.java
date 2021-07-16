@@ -41,9 +41,9 @@ public class ClienteService { //Classe responsável pela consulta no repository
 	}
 	
 	public Cliente update(Cliente obj) {
-		find(obj.getId());
-		
-		return repo.save(obj);
+		Cliente newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
 	}
 	
 	public void delete(Integer id) {
@@ -52,7 +52,7 @@ public class ClienteService { //Classe responsável pela consulta no repository
 			repo.deleteById(id);
 		}
 		catch (DataIntegrityViolationException e) {
-			throw new DataIntegrityException("Não é possível excluir uma categoria que possui produtos");
+			throw new DataIntegrityException("Não é possível excluir porque há pedidos relacionados");
 		}
 	}
 	public List<Cliente> findAll() {
@@ -89,7 +89,6 @@ public class ClienteService { //Classe responsável pela consulta no repository
 		newObj.setNome(obj.getNome());
 		newObj.setEmail(obj.getEmail());
 	}
-	
 	}
 	
 
