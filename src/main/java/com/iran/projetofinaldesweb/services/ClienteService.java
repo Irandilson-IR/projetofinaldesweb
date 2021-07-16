@@ -3,6 +3,8 @@ package com.iran.projetofinaldesweb.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -18,6 +20,7 @@ import com.iran.projetofinaldesweb.dto.ClienteDTO;
 import com.iran.projetofinaldesweb.dto.ClienteNewDTO;
 import com.iran.projetofinaldesweb.repositories.CidadeRepository;
 import com.iran.projetofinaldesweb.repositories.ClienteRepository;
+import com.iran.projetofinaldesweb.repositories.EnderecoRepository;
 import com.iran.projetofinaldesweb.services.exceptions.DataIntegrityException;
 import com.iran.projetofinaldesweb.services.exceptions.ObjectNotFoundException;
 
@@ -28,6 +31,8 @@ public class ClienteService { //Classe responsável pela consulta no repository
 	private ClienteRepository repo;
 	@Autowired
 	private CidadeRepository cidadeRepository;
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 	
 	public Cliente find(Integer id) {
 		Optional<Cliente> obj = repo.findById(id);
@@ -35,9 +40,12 @@ public class ClienteService { //Classe responsável pela consulta no repository
 		"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
 		}
 	
+	@Transactional
 	public Cliente insert(Cliente obj) {
 		obj.setId(null);
-		return repo.save(obj);
+		obj = repo.save(obj);
+		enderecoRepository.saveAll(obj.getEnderecos());
+		return obj;
 	}
 	
 	public Cliente update(Cliente obj) {
@@ -84,6 +92,9 @@ public class ClienteService { //Classe responsável pela consulta no repository
 		}
 		return cli;
 	}
+	
+	
+	
 	
 	private void updateData(Cliente newObj, Cliente obj) {
 		newObj.setNome(obj.getNome());
