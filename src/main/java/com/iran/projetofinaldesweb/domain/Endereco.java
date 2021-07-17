@@ -22,6 +22,7 @@ public class Endereco implements Serializable {
 	private String complemento;
 	private String bairro;
 	private String cep;
+	
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="cliente")

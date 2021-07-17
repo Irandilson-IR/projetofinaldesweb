@@ -8,7 +8,9 @@ import javax.persistence.ManyToOne;
 
 @Embeddable
 public class ItemPedidoPk implements Serializable{
-	private static final long serialversionUID = 1L;
+	
+	private static final long serialVersionUID = 1L;
+
 	
 	@ManyToOne
 	@JoinColumn(name="pedido_id")

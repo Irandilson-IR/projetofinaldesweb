@@ -30,8 +30,7 @@ public class ClienteService { //Classe responsável pela consulta no repository
 	@Autowired
 	private ClienteRepository repo;
 	@Autowired
-	private CidadeRepository cidadeRepository;
-	@Autowired
+	
 	private EnderecoRepository enderecoRepository;
 	
 	public Cliente find(Integer id) {
@@ -74,12 +73,12 @@ public class ClienteService { //Classe responsável pela consulta no repository
 	}
 	
 	public Cliente fromDTO(ClienteDTO objDto) {
-		return new Cliente(objDto.getId(), objDto.getNome(), objDto.getEmail(), null, null);
+		return new Cliente(objDto.getId(), objDto.getNome(), objDto.getEmail(), null, null, null);
 		
 	}	
 	
 	public Cliente fromDTO(ClienteNewDTO objDto) {
-		Cliente cli = new Cliente(null, objDto.getNome(), objDto.getEmail(), objDto.getCpfOuCnpj(), TipoCliente.toEnum(objDto.getTipo()));
+		Cliente cli = new Cliente(null, objDto.getNome(), objDto.getEmail(), objDto.getCpfOuCnpj(), TipoCliente.toEnum(objDto.getTipo()), null);
 		Cidade cid = new Cidade(objDto.getCidadeId(), null, null);
 		Endereco end = new Endereco(null, objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(), objDto.getCep(), cli, cid);
 		cli.getEnderecos().add(end);
