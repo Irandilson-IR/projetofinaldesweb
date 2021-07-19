@@ -26,7 +26,6 @@ public class Endereco implements Serializable {
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="cliente")
-	
 	private Cliente cliente;
 	
 	@ManyToOne
@@ -84,9 +83,17 @@ public class Endereco implements Serializable {
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
+	public Cliente getCliente() {
+		return cliente;
+	}
+	public void setCliente(Cidade cliente) {
+		this.cidade = cliente;
+	}
+	
 	public Cidade getCidade() {
 		return cidade;
 	}
+
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}

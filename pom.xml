@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.iran</groupId>
-	<artifactId>projetofinaldesweb</artifactId>
+	<artifactId>projetodesweb</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>projetofinaldesweb</name>
-	<description>Demo project for Spring Boot</description>
+	<name>projetodesweb</name>
+	<description>Projeto Des. Web com Spring Boot - Java - BD</description>
 	<properties>
 		<java.version>16</java.version>
 	</properties>
@@ -35,7 +35,7 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-		<scope>runtime</scope>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -43,37 +43,56 @@
 		</dependency>
 		
 		<dependency>
-			
-			<groupId>javax.validation</groupId>
-			
-			<artifactId>validation-api</artifactId>
-			
-		</dependency>
-		
-			
-		<dependency>
-			
-			<groupId>org.hibernate</groupId>
-			
-			<artifactId>hibernate-validator</artifactId>
-			
-			<version>6.1.5.Final</version>
-			
-		</dependency>
-		
-		<dependency>
-		    <groupId>org.springframework.security</groupId>
-		    <artifactId>spring-security-core</artifactId>
-		  
-		</dependency>
-		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
-			<dependency>
+		
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
+		
+	
+		
+		<dependency>
+
+    <groupId>javax.validation</groupId>
+
+    <artifactId>validation-api</artifactId>
+
+    <version>2.0.1.Final</version><!--$NO-MVN-MAN-VER$-->
+
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
+
+<dependency>
+
+    <groupId>org.hibernate</groupId>
+
+    <artifactId>hibernate-validator</artifactId>
+
+    <version>7.0.1.Final</version>
+
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api -->
+
+<dependency>
+
+    <groupId>jakarta.validation</groupId>
+
+    <artifactId>jakarta.validation-api</artifactId>
+
+    <version>3.0.0</version><!--$NO-MVN-MAN-VER$-->
+
+</dependency>
 			
 	</dependencies>
 

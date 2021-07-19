@@ -18,7 +18,7 @@ import com.iran.projetofinaldesweb.domain.Endereco;
 import com.iran.projetofinaldesweb.domain.enums.TipoCliente;
 import com.iran.projetofinaldesweb.dto.ClienteDTO;
 import com.iran.projetofinaldesweb.dto.ClienteNewDTO;
-import com.iran.projetofinaldesweb.repositories.CidadeRepository;
+
 import com.iran.projetofinaldesweb.repositories.ClienteRepository;
 import com.iran.projetofinaldesweb.repositories.EnderecoRepository;
 import com.iran.projetofinaldesweb.services.exceptions.DataIntegrityException;

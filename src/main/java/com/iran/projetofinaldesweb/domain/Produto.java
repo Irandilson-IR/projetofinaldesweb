@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
+
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -101,10 +101,7 @@ public class Produto implements Serializable {
 		this.itens = itens;
 	}
 	
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
+	
 
 	@Override
 	public boolean equals(Object obj) {

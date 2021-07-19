@@ -159,11 +159,5 @@ public class ClienteNewDTO implements Serializable {
 		this.cidadeId = cidadeId;
 	}
 	
-	public String getSenha() {
-		return senha;
-	}
 	
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
 }

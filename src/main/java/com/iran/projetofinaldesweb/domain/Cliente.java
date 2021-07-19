@@ -5,12 +5,13 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,9 +35,7 @@ import com.iran.projetofinaldesweb.domain.enums.TipoCliente;
 		private String cpfOuCnpj;
 		private Integer tipo;
 		
-		@JsonIgnore
-		private String senha;
-		
+				
 		@OneToMany(mappedBy="cliente", cascade=CascadeType.ALL)
 		private List<Endereco> enderecos = new ArrayList<>();
 		
@@ -44,10 +43,7 @@ import com.iran.projetofinaldesweb.domain.enums.TipoCliente;
 		@CollectionTable(name="TELEFONE")
 		private Set<String> telefones = new HashSet<>();
 		
-		@ElementCollection(fetch=FetchType.EAGER)
-		@CollectionTable(name="PERFIS")
-		private Set<Integer> perfis = new HashSet<>();
-		
+			
 		@JsonIgnore
 		@OneToMany(mappedBy="cliente")
 		private List<Pedido> pedidos = new ArrayList<>();
@@ -63,7 +59,7 @@ import com.iran.projetofinaldesweb.domain.enums.TipoCliente;
 			this.email = email;
 			this.cpfOuCnpj = cpfOuCnpj;
 			this.tipo = (tipo==null) ? null : tipo.getCod();
-			this.senha = senha;
+			
 			
 		}
 
@@ -107,15 +103,8 @@ import com.iran.projetofinaldesweb.domain.enums.TipoCliente;
 			this.tipo = tipo.getCod();
 		}
 
-		public String getSenha() {
-			return senha;
-		}
 		
-		public void setSenha(String senha) {
-			this.senha = senha;
-		}
-		
-		
+				
 		
 		public List<Endereco> getEnderecos() {
 			return enderecos;
