@@ -16,11 +16,14 @@ import org.springframework.stereotype.Service;
 import com.iran.projetodesweb.domain.Cidade;
 import com.iran.projetodesweb.domain.Cliente;
 import com.iran.projetodesweb.domain.Endereco;
+import com.iran.projetodesweb.domain.enums.Perfil;
 import com.iran.projetodesweb.domain.enums.TipoCliente;
 import com.iran.projetodesweb.dto.ClienteDTO;
 import com.iran.projetodesweb.dto.ClienteNewDTO;
 import com.iran.projetodesweb.repositories.ClienteRepository;
 import com.iran.projetodesweb.repositories.EnderecoRepository;
+import com.iran.projetodesweb.security.UserSS;
+import com.iran.projetodesweb.services.exceptions.AuthorizationException;
 import com.iran.projetodesweb.services.exceptions.DataIntegrityException;
 import com.iran.projetodesweb.services.exceptions.ObjectNotFoundException;
 
@@ -37,6 +40,11 @@ public class ClienteService { //Classe responsável pela consulta no repository
 	private BCryptPasswordEncoder pe;
 	
 	public Cliente find(Integer id) {
+		
+		UserSS user = UserService.authenticated();
+		if (user==null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
 		Optional<Cliente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 		"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
