@@ -2,16 +2,8 @@ package com.iran.projetodesweb.services;
 
 import java.util.Date;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.Context;
 
 import com.iran.projetodesweb.domain.Pedido;
 
@@ -19,13 +11,6 @@ public abstract class AbstractEmailService implements EmailService {
 	
 	@Value("${default.sender}")
 	private String sender;
-	@Autowired
-	private TemplateEngine templateEngine;
-	
-	@Autowired
-	private JavaMailSender javaMailSender;
-	private MimeMessage mimeMessage;
-	
 	@Override
 	public void sendOrderConfirmationEmail(Pedido obj) {
 		SimpleMailMessage sm = prepareSimpleMailMessageFromPedido(obj);
@@ -42,6 +27,7 @@ public abstract class AbstractEmailService implements EmailService {
 		return sm;
 	}
 	
+	/*
 	protected String htmlFromTemplatePedido(Pedido obj) {
 		Context context = new Context();
 		context.setVariable("pedido", obj);
@@ -68,6 +54,6 @@ public abstract class AbstractEmailService implements EmailService {
 		return mimeMessage;
 			
 	}
-	
+	*/
 	
 }
