@@ -10,6 +10,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.iran.projetodesweb.domain.Cidade;
@@ -18,7 +19,6 @@ import com.iran.projetodesweb.domain.Endereco;
 import com.iran.projetodesweb.domain.enums.TipoCliente;
 import com.iran.projetodesweb.dto.ClienteDTO;
 import com.iran.projetodesweb.dto.ClienteNewDTO;
-
 import com.iran.projetodesweb.repositories.ClienteRepository;
 import com.iran.projetodesweb.repositories.EnderecoRepository;
 import com.iran.projetodesweb.services.exceptions.DataIntegrityException;
@@ -32,6 +32,9 @@ public class ClienteService { //Classe responsável pela consulta no repository
 	@Autowired
 	
 	private EnderecoRepository enderecoRepository;
+	
+	@Autowired
+	private BCryptPasswordEncoder pe;
 	
 	public Cliente find(Integer id) {
 		Optional<Cliente> obj = repo.findById(id);
@@ -78,7 +81,7 @@ public class ClienteService { //Classe responsável pela consulta no repository
 	}	
 	
 	public Cliente fromDTO(ClienteNewDTO objDto) {
-		Cliente cli = new Cliente(null, objDto.getNome(), objDto.getEmail(), objDto.getCpfOuCnpj(), TipoCliente.toEnum(objDto.getTipo()), null);
+		Cliente cli = new Cliente(null, objDto.getNome(), objDto.getEmail(), objDto.getCpfOuCnpj(), TipoCliente.toEnum(objDto.getTipo()), pe.encode(objDto.getSenha()));
 		Cidade cid = new Cidade(objDto.getCidadeId(), null, null);
 		Endereco end = new Endereco(null, objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(), objDto.getCep(), cli, cid);
 		cli.getEnderecos().add(end);

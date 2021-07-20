@@ -34,6 +34,9 @@ import com.iran.projetodesweb.domain.enums.TipoCliente;
 		private String cpfOuCnpj;
 		private Integer tipo;
 		
+		@JsonIgnore
+		private String senha;
+		
 			
 		@OneToMany(mappedBy="cliente", cascade=CascadeType.ALL)
 		private List<Endereco> enderecos = new ArrayList<>();
@@ -58,6 +61,7 @@ import com.iran.projetodesweb.domain.enums.TipoCliente;
 			this.email = email;
 			this.cpfOuCnpj = cpfOuCnpj;
 			this.tipo = (tipo==null) ? null : tipo.getCod();
+			this.senha = senha;
 			
 			
 		}
@@ -102,7 +106,13 @@ import com.iran.projetodesweb.domain.enums.TipoCliente;
 			this.tipo = tipo.getCod();
 		}
 
-		
+		public String getSenha() {
+			return senha;
+		}
+
+		public void setSenha(String senha) {
+			this.senha = senha;
+		}
 				
 		
 		public List<Endereco> getEnderecos() {
@@ -129,6 +139,8 @@ import com.iran.projetodesweb.domain.enums.TipoCliente;
 			this.pedidos = pedidos;
 		}
 		
+		
+		
 		@Override
 		public int hashCode() {
 			final int prime = 31;
@@ -152,5 +164,7 @@ import com.iran.projetodesweb.domain.enums.TipoCliente;
 			} else if (!id.equals(other.id))
 				return false;
 			return true;
-		}	
+		}
+
+			
 	}
