@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.iran.projetodesweb.dto.EmailDTO;
 import com.iran.projetodesweb.security.JWTUtil;
 import com.iran.projetodesweb.security.UserSS;
+import com.iran.projetodesweb.services.AuthService;
 import com.iran.projetodesweb.services.UserService;
 
 
@@ -40,4 +42,6 @@ public class AuthResource {
 		service.sendNewPassword(objDto.getEmail());
 		return ResponseEntity.noContent().build();
 	}
+	
+	
 }

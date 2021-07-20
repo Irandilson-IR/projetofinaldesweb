@@ -12,7 +12,6 @@ import com.iran.projetodesweb.services.DBService;
 import com.iran.projetodesweb.services.EmailService;
 import com.iran.projetodesweb.services.SmtpEmailService;
 
-
 @Configuration
 @Profile("dev")
 public class DevConfig {
@@ -33,10 +32,9 @@ public class DevConfig {
 		dbService.instantiateTestDatabase();
 		return true;
 	}
+	
 	@Bean
 	public EmailService emailService() {
-		return new SmtpEmailService();
+		return (EmailService) new SmtpEmailService();
 	}
-	
 }
-
