@@ -17,6 +17,8 @@ import com.iran.projetodesweb.domain.enums.EstadoPagamento;
 import com.iran.projetodesweb.repositories.ItemPedidoRepository;
 import com.iran.projetodesweb.repositories.PagamentoRepository;
 import com.iran.projetodesweb.repositories.PedidoRepository;
+import com.iran.projetodesweb.security.UserSS;
+import com.iran.projetodesweb.services.exceptions.AuthorizationException;
 import com.iran.projetodesweb.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -43,8 +45,6 @@ public class PedidoService {
 	@Autowired
 	private EmailService emailService;
 
-	private Cliente user;
-	
 	public Pedido find(Integer id) {
 		Optional<Pedido> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
@@ -75,7 +75,10 @@ public class PedidoService {
 	}
 	
 	public Page<Pedido> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
-		
+		UserSS user = UserService.authenticated();
+		if (user == null) {
+			throw new AuthorizationException("Acesso negado");
+		}
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		Cliente cliente =  clienteService.find(user.getId());
 		return repo.findByCliente(cliente, pageRequest);
