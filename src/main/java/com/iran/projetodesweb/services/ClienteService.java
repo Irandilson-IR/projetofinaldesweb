@@ -1,5 +1,6 @@
 package com.iran.projetodesweb.services;
 
+import java.awt.image.BufferedImage;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -119,6 +120,16 @@ public class ClienteService { //Classe responsável pela consulta no repository
 			throw new AuthorizationException("Acesso negado");
 		}
 	}
+	
+	BufferedImage jpgImage = imageService.getJpgImageFromFile(multipartFile);
+	jpgImage = imageService.cropSquare(jpgImage);
+	jpgImage = imageService.resize(jpgImage, size);
+	
+	String fileName = prefix + user.getId() + ".jpg";
+	
+	return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");
+}
+}
 	
 
 
